@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a476d432-de7f-4156-b47a-76df6cfbe8c7" name="Default Changelist" comment="" />
+    <list default="true" id="a476d432-de7f-4156-b47a-76df6cfbe8c7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/2470_assignment_2/Message/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/2470_assignment_2/Message/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message/Message.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +20,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1WfIszMIlCQeeLtQDkhRqSpkuyQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +32,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="382" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -61,8 +72,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Java Scratch.Unnamed" />
       <item itemvalue="Application.Message" />
+      <item itemvalue="Java Scratch.Unnamed" />
     </list>
     <recent_temporary>
       <list>
@@ -92,7 +103,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579534433150</updated>
-      <workItem from="1579534436104" duration="13824000" />
+      <workItem from="1579534436104" duration="15644000" />
+      <workItem from="1579757822336" duration="5076000" />
     </task>
     <servers />
   </component>
@@ -128,22 +140,22 @@
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
     <state x="701" y="310" width="424" height="484" key="FileChooserDialogImpl/0.27.1837.1053@0.27.1837.1053" timestamp="1579536542322" />
-    <state width="1791" height="278" key="GridCell.Tab.0.bottom" timestamp="1579634369561">
+    <state width="1791" height="278" key="GridCell.Tab.0.bottom" timestamp="1579808169928">
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
-    <state width="1791" height="278" key="GridCell.Tab.0.bottom/0.27.1837.1053@0.27.1837.1053" timestamp="1579634369561" />
-    <state width="1791" height="278" key="GridCell.Tab.0.center" timestamp="1579634369561">
+    <state width="1791" height="278" key="GridCell.Tab.0.bottom/0.27.1837.1053@0.27.1837.1053" timestamp="1579808169928" />
+    <state width="1791" height="278" key="GridCell.Tab.0.center" timestamp="1579808169928">
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
-    <state width="1791" height="278" key="GridCell.Tab.0.center/0.27.1837.1053@0.27.1837.1053" timestamp="1579634369561" />
-    <state width="1791" height="278" key="GridCell.Tab.0.left" timestamp="1579634369561">
+    <state width="1791" height="278" key="GridCell.Tab.0.center/0.27.1837.1053@0.27.1837.1053" timestamp="1579808169928" />
+    <state width="1791" height="278" key="GridCell.Tab.0.left" timestamp="1579808169927">
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
-    <state width="1791" height="278" key="GridCell.Tab.0.left/0.27.1837.1053@0.27.1837.1053" timestamp="1579634369561" />
-    <state width="1791" height="278" key="GridCell.Tab.0.right" timestamp="1579634369561">
+    <state width="1791" height="278" key="GridCell.Tab.0.left/0.27.1837.1053@0.27.1837.1053" timestamp="1579808169927" />
+    <state width="1791" height="278" key="GridCell.Tab.0.right" timestamp="1579808169928">
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
-    <state width="1791" height="278" key="GridCell.Tab.0.right/0.27.1837.1053@0.27.1837.1053" timestamp="1579634369561" />
+    <state width="1791" height="278" key="GridCell.Tab.0.right/0.27.1837.1053@0.27.1837.1053" timestamp="1579808169928" />
     <state width="1791" height="343" key="GridCell.Tab.1.bottom" timestamp="1579567668183">
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
@@ -164,9 +176,13 @@
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
     <state x="407" y="187" width="1199" height="730" key="SettingsEditor/0.27.1837.1053@0.27.1837.1053" timestamp="1579534815906" />
-    <state x="574" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579534437506">
+    <state x="574" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1579757834467">
       <screen x="0" y="27" width="1837" height="1053" />
     </state>
-    <state x="574" y="380" key="com.intellij.ide.util.TipDialog/0.27.1837.1053@0.27.1837.1053" timestamp="1579534437506" />
+    <state x="574" y="380" key="com.intellij.ide.util.TipDialog/0.27.1837.1053@0.27.1837.1053" timestamp="1579757834467" />
+    <state x="651" y="318" width="524" height="468" key="extract.method.dialog" timestamp="1579807135623">
+      <screen x="0" y="27" width="1837" height="1053" />
+    </state>
+    <state x="651" y="318" width="524" height="468" key="extract.method.dialog/0.27.1837.1053@0.27.1837.1053" timestamp="1579807135623" />
   </component>
 </project>
