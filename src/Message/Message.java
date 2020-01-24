@@ -14,11 +14,20 @@ public class Message extends JPanel{
     private static String TEXT;
     private static String WIDTH;
 
-    Boolean color_b_err = false;
-    Boolean color_f_err = false;
+    private static String[] COLOR_LIST = {
+            "Black", "Blue", "Cyan", "Dark gray",
+            "Gray", "Green", "Light gray", "Magenta",
+            "Orange", "Pink", "Red", "White", "Yellow"
+    };
+    private static String[] FONT_LIST = {
+            "Regular", "Bold", "Italic", "Bold Italic"
+    };
+    private static String[] SHAPE_LIST = {
+            "Oval", "Rectangle", "Round Rectangle"
+    };
+
     Boolean font_err = false;
     Boolean height_err = false;
-    Boolean shape_err = false;
     Boolean text_err = false;
     Boolean width_err = false;
 
@@ -34,6 +43,14 @@ public class Message extends JPanel{
     }
 
     public void paint(Graphics g){
+        // No error checking for COLOR_B, COLOR_F, FONT, and SHAPE
+
+        /* Draw background part
+           Including:
+           - COLOR_B
+           - WIDTH & HEIGHT
+           - SHAPE
+        */
         switch (COLOR_B) {
             case "black":
                 g.setColor(Color.black);
@@ -56,7 +73,7 @@ public class Message extends JPanel{
             case "light gray":
                 g.setColor(Color.lightGray);
                 break;
-            case "megenta":
+            case "magenta":
                 g.setColor(Color.magenta);
                 break;
             case "orange":
@@ -74,20 +91,12 @@ public class Message extends JPanel{
             case "yellow":
                 g.setColor(Color.yellow);
                 break;
-            default:
-                color_b_err = true;
-                error_message = error_message + " - Background color value\n";
-                break;
         }
 
-        if (!isInteger(WIDTH)) {
-            width_err = true;
-        }
-        if (!isInteger(HEIGHT)) {
-            height_err = true;
-        }
+        if (!isInteger(WIDTH)) { width_err = true; }
+        if (!isInteger(HEIGHT)) { height_err = true; }
 
-        if (!color_b_err && !width_err && !height_err) {
+        if (!width_err && !height_err) {
             switch (SHAPE) {
                 case "oval":
                     g.fillOval(
@@ -105,15 +114,24 @@ public class Message extends JPanel{
                             Integer.parseInt(HEIGHT)
                     );
                     break;
-                case "rounded":
-                    break;
-                default:
-                    shape_err = true;
-                    error_message = error_message + " - Shape value\n";
+                case "round rectangle":
+                    g.fillRoundRect(
+                            (500 - Integer.parseInt(WIDTH)) / 2,
+                            (300 - Integer.parseInt(HEIGHT)) / 2,
+                            Integer.parseInt(WIDTH),
+                            Integer.parseInt(HEIGHT),
+                            30,
+                            30
+                    );
                     break;
             }
         }
+
+        /* Draw text part
+           Including:
+        */
     }
+
     public static void main(String[] args){
         JFrame f = new JFrame("Message");
         JPanel main = new JPanel();
@@ -122,17 +140,22 @@ public class Message extends JPanel{
         GridLayout grid = new GridLayout(10,2);
 
         JLabel color_back = new JLabel("Color - Background:");
-        JTextField color_back_field = new JTextField(20);
+        JComboBox color_back_field = new JComboBox(COLOR_LIST);
+        color_back_field.setEditable(false);
         JLabel color_front = new JLabel("Color - Front:");
-        JTextField color_front_field = new JTextField(20);
+        JComboBox color_front_field = new JComboBox(COLOR_LIST);
+        color_front_field.setEditable(false);
         JLabel font = new JLabel("Font style:");
-        JTextField font_field = new JTextField(20);
+        JComboBox font_field = new JComboBox(FONT_LIST);
+        font_field.setEditable(false);
+        JLabel shape = new JLabel("Shape:");
+        JComboBox shape_field = new JComboBox(SHAPE_LIST);
+        shape_field.setEditable(false);
+
         JLabel font_size = new JLabel("Font size:");
         JTextField font_size_field = new JTextField(20);
         JLabel height = new JLabel("Height:");
         JTextField height_field = new JTextField(20);
-        JLabel shape = new JLabel("Shape:");
-        JTextField shape_field = new JTextField(20);
         JLabel text = new JLabel("Text:");
         JTextField text_field = new JTextField(20);
         JLabel width = new JLabel("Width:");
@@ -142,12 +165,12 @@ public class Message extends JPanel{
         draw.setSize(20,20);
 
         draw.addActionListener(actionEvent -> {
-            COLOR_B = color_back_field.getText().toLowerCase();
-            COLOR_F = color_front_field.getText().toLowerCase();
-            FONT = font_field.getText().toLowerCase();
+            COLOR_B = color_back_field.getSelectedItem().toString().toLowerCase();
+            COLOR_F = color_front_field.getSelectedItem().toString().toLowerCase();
+            FONT = font_field.getSelectedItem().toString().toLowerCase();
             FONT_SIZE = font_size_field.getText();
             HEIGHT = height_field.getText();
-            SHAPE = shape_field.getText().toLowerCase();
+            SHAPE = shape_field.getSelectedItem().toString().toLowerCase();
             TEXT = text_field.getText();
             WIDTH = width_field.getText();
 
