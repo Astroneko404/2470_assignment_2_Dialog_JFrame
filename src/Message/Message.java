@@ -26,10 +26,11 @@ public class Message extends JPanel{
             "Oval", "Rectangle", "Round Rectangle"
     };
 
-    Boolean font_err = false;
+    Boolean font_size_err = false;
     Boolean height_err = false;
     Boolean text_err = false;
     Boolean width_err = false;
+    Boolean err = false;
 
     String error_message = "Error:\n";
 
@@ -44,59 +45,86 @@ public class Message extends JPanel{
 
     public void paint(Graphics g){
         // No error checking for COLOR_B, COLOR_F, FONT, and SHAPE
-
-        /* Draw background part
-           Including:
-           - COLOR_B
-           - WIDTH & HEIGHT
-           - SHAPE
-        */
-        switch (COLOR_B) {
-            case "black":
-                g.setColor(Color.black);
-                break;
-            case "blue":
-                g.setColor(Color.blue);
-                break;
-            case "cyan":
-                g.setColor(Color.cyan);
-                break;
-            case "dark gray":
-                g.setColor(Color.darkGray);
-                break;
-            case "gray":
-                g.setColor(Color.gray);
-                break;
-            case "green":
-                g.setColor(Color.green);
-                break;
-            case "light gray":
-                g.setColor(Color.lightGray);
-                break;
-            case "magenta":
-                g.setColor(Color.magenta);
-                break;
-            case "orange":
-                g.setColor(Color.orange);
-                break;
-            case "pink":
-                g.setColor(Color.pink);
-                break;
-            case "red":
-                g.setColor(Color.red);
-                break;
-            case "white":
-                g.setColor(Color.white);
-                break;
-            case "yellow":
-                g.setColor(Color.yellow);
-                break;
+        if (!isInteger(WIDTH) || Integer.parseInt(WIDTH) <= 0 || Integer.parseInt(WIDTH) > 500) {
+            width_err = true;
+            err = true;
+            g.setFont(new Font("Serif", Font.PLAIN, 16));
+            g.drawString(error_message, 15, 15);
+            g.drawString(" - WIDTH should be an integer in range (0, 500]\n",
+                    15, 15 + g.getFontMetrics().getHeight());
         }
-
-        if (!isInteger(WIDTH)) { width_err = true; }
-        if (!isInteger(HEIGHT)) { height_err = true; }
-
-        if (!width_err && !height_err) {
+        else if (!isInteger(HEIGHT) || Integer.parseInt(HEIGHT) <= 0 || Integer.parseInt(HEIGHT) > 300) {
+            height_err = true;
+            err = true;
+            g.setFont(new Font("Serif", Font.PLAIN, 16));
+            g.drawString(error_message, 15, 15);
+            g.drawString(" - HEIGHT should be an integer in range (0, 300]\n",
+                    15, 15 + g.getFontMetrics().getHeight());
+        }
+        else if (!isInteger(FONT_SIZE) || Integer.parseInt(FONT_SIZE) < 0) {
+            font_size_err = true;
+            err = true;
+            g.setFont(new Font("Serif", Font.PLAIN, 16));
+            g.drawString(error_message, 15, 15);
+            g.drawString(" - FONT SIZE should be an integer larger than 0\n",
+                    15, 15 + g.getFontMetrics().getHeight());
+        }
+        else if (TEXT.isEmpty()) {
+            text_err = true;
+            err = true;
+            g.setFont(new Font("Serif", Font.PLAIN, 16));
+            g.drawString(error_message, 15, 15);
+            g.drawString(" - TEXT cannot be empty\n",
+                    15, 15 + g.getFontMetrics().getHeight());
+        }
+        else {
+            /* Draw background part
+               Including:
+                - COLOR_B
+                - WIDTH & HEIGHT
+                - SHAPE
+            */
+            switch (COLOR_B) {
+                case "black":
+                    g.setColor(Color.black);
+                    break;
+                case "blue":
+                    g.setColor(Color.blue);
+                    break;
+                case "cyan":
+                    g.setColor(Color.cyan);
+                    break;
+                case "dark gray":
+                    g.setColor(Color.darkGray);
+                    break;
+                case "gray":
+                    g.setColor(Color.gray);
+                    break;
+                case "green":
+                    g.setColor(Color.green);
+                    break;
+                case "light gray":
+                    g.setColor(Color.lightGray);
+                    break;
+                case "magenta":
+                    g.setColor(Color.magenta);
+                    break;
+                case "orange":
+                    g.setColor(Color.orange);
+                    break;
+                case "pink":
+                    g.setColor(Color.pink);
+                    break;
+                case "red":
+                    g.setColor(Color.red);
+                    break;
+                case "white":
+                    g.setColor(Color.white);
+                    break;
+                case "yellow":
+                    g.setColor(Color.yellow);
+                    break;
+            }
             switch (SHAPE) {
                 case "oval":
                     g.fillOval(
@@ -125,11 +153,66 @@ public class Message extends JPanel{
                     );
                     break;
             }
-        }
 
-        /* Draw text part
-           Including:
-        */
+            /* Draw text part
+               Including:
+             */
+            switch (COLOR_F) {
+                case "black":
+                    g.setColor(Color.black);
+                    break;
+                case "blue":
+                    g.setColor(Color.blue);
+                    break;
+                case "cyan":
+                    g.setColor(Color.cyan);
+                    break;
+                case "dark gray":
+                    g.setColor(Color.darkGray);
+                    break;
+                case "gray":
+                    g.setColor(Color.gray);
+                    break;
+                case "green":
+                    g.setColor(Color.green);
+                    break;
+                case "light gray":
+                    g.setColor(Color.lightGray);
+                    break;
+                case "magenta":
+                    g.setColor(Color.magenta);
+                    break;
+                case "orange":
+                    g.setColor(Color.orange);
+                    break;
+                case "pink":
+                    g.setColor(Color.pink);
+                    break;
+                case "red":
+                    g.setColor(Color.red);
+                    break;
+                case "white":
+                    g.setColor(Color.white);
+                    break;
+                case "yellow":
+                    g.setColor(Color.yellow);
+                    break;
+            }
+            switch (FONT) {
+                case "regular":
+                    g.setFont(new Font("Serif", Font.PLAIN, Integer.parseInt(FONT_SIZE)));
+                case "bold":
+                    g.setFont(new Font("Serif", Font.BOLD, Integer.parseInt(FONT_SIZE)));
+                case "italic":
+                    g.setFont(new Font("Serif", Font.ITALIC, Integer.parseInt(FONT_SIZE)));
+                case "bold italic":
+                    g.setFont(new Font("Serif", Font.BOLD + Font.ITALIC, Integer.parseInt(FONT_SIZE)));
+            }
+            FontMetrics fm = g.getFontMetrics();
+            int str_width = fm.stringWidth(TEXT);
+            int str_height = fm.getHeight() - fm.getAscent() - fm.getDescent();
+            g.drawString(TEXT, (500 - str_width) / 2, (300 - str_height) / 2);
+        }
     }
 
     public static void main(String[] args){
