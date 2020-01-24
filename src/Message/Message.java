@@ -85,48 +85,48 @@ public class Message extends JPanel{
                 - SHAPE
             */
             switch (COLOR_B) {
-                case "black":
+                case "Black":
                     g.setColor(Color.black);
                     break;
-                case "blue":
+                case "Blue":
                     g.setColor(Color.blue);
                     break;
-                case "cyan":
+                case "Cyan":
                     g.setColor(Color.cyan);
                     break;
-                case "dark gray":
+                case "Dark gray":
                     g.setColor(Color.darkGray);
                     break;
-                case "gray":
+                case "Gray":
                     g.setColor(Color.gray);
                     break;
-                case "green":
+                case "Green":
                     g.setColor(Color.green);
                     break;
-                case "light gray":
+                case "Light gray":
                     g.setColor(Color.lightGray);
                     break;
-                case "magenta":
+                case "Magenta":
                     g.setColor(Color.magenta);
                     break;
-                case "orange":
+                case "Orange":
                     g.setColor(Color.orange);
                     break;
-                case "pink":
+                case "Pink":
                     g.setColor(Color.pink);
                     break;
-                case "red":
+                case "Red":
                     g.setColor(Color.red);
                     break;
-                case "white":
+                case "White":
                     g.setColor(Color.white);
                     break;
-                case "yellow":
+                case "Yellow":
                     g.setColor(Color.yellow);
                     break;
             }
             switch (SHAPE) {
-                case "oval":
+                case "Oval":
                     g.fillOval(
                             (500 - Integer.parseInt(WIDTH)) / 2,
                             (300 - Integer.parseInt(HEIGHT)) / 2,
@@ -134,7 +134,7 @@ public class Message extends JPanel{
                             Integer.parseInt(HEIGHT)
                     );
                     break;
-                case "rectangle":
+                case "Rectangle":
                     g.fillRect(
                             (500 - Integer.parseInt(WIDTH)) / 2,
                             (300 - Integer.parseInt(HEIGHT)) / 2,
@@ -142,7 +142,7 @@ public class Message extends JPanel{
                             Integer.parseInt(HEIGHT)
                     );
                     break;
-                case "round rectangle":
+                case "Round Rectangle":
                     g.fillRoundRect(
                             (500 - Integer.parseInt(WIDTH)) / 2,
                             (300 - Integer.parseInt(HEIGHT)) / 2,
@@ -158,54 +158,54 @@ public class Message extends JPanel{
                Including:
              */
             switch (COLOR_F) {
-                case "black":
+                case "Black":
                     g.setColor(Color.black);
                     break;
-                case "blue":
+                case "Blue":
                     g.setColor(Color.blue);
                     break;
-                case "cyan":
+                case "Cyan":
                     g.setColor(Color.cyan);
                     break;
-                case "dark gray":
+                case "Dark gray":
                     g.setColor(Color.darkGray);
                     break;
-                case "gray":
+                case "Gray":
                     g.setColor(Color.gray);
                     break;
-                case "green":
+                case "Green":
                     g.setColor(Color.green);
                     break;
-                case "light gray":
+                case "Light gray":
                     g.setColor(Color.lightGray);
                     break;
-                case "magenta":
+                case "Magenta":
                     g.setColor(Color.magenta);
                     break;
-                case "orange":
+                case "Orange":
                     g.setColor(Color.orange);
                     break;
-                case "pink":
+                case "Pink":
                     g.setColor(Color.pink);
                     break;
-                case "red":
+                case "Red":
                     g.setColor(Color.red);
                     break;
-                case "white":
+                case "White":
                     g.setColor(Color.white);
                     break;
-                case "yellow":
+                case "Yellow":
                     g.setColor(Color.yellow);
                     break;
             }
             switch (FONT) {
-                case "regular":
+                case "Regular":
                     g.setFont(new Font("Serif", Font.PLAIN, Integer.parseInt(FONT_SIZE)));
-                case "bold":
+                case "Bold":
                     g.setFont(new Font("Serif", Font.BOLD, Integer.parseInt(FONT_SIZE)));
-                case "italic":
+                case "Italic":
                     g.setFont(new Font("Serif", Font.ITALIC, Integer.parseInt(FONT_SIZE)));
-                case "bold italic":
+                case "Bold Italic":
                     g.setFont(new Font("Serif", Font.BOLD + Font.ITALIC, Integer.parseInt(FONT_SIZE)));
             }
             FontMetrics fm = g.getFontMetrics();
@@ -248,12 +248,12 @@ public class Message extends JPanel{
         draw.setSize(20,20);
 
         draw.addActionListener(actionEvent -> {
-            COLOR_B = color_back_field.getSelectedItem().toString().toLowerCase();
-            COLOR_F = color_front_field.getSelectedItem().toString().toLowerCase();
-            FONT = font_field.getSelectedItem().toString().toLowerCase();
+            COLOR_B = color_back_field.getSelectedItem().toString();
+            COLOR_F = color_front_field.getSelectedItem().toString();
+            FONT = font_field.getSelectedItem().toString();
             FONT_SIZE = font_size_field.getText();
             HEIGHT = height_field.getText();
-            SHAPE = shape_field.getSelectedItem().toString().toLowerCase();
+            SHAPE = shape_field.getSelectedItem().toString();
             TEXT = text_field.getText();
             WIDTH = width_field.getText();
 
