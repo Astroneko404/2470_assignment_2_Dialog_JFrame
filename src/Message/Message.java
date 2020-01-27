@@ -1,7 +1,7 @@
 package Message;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.util.Objects;
 import javax.swing.*;
 
 public class Message extends JPanel{
@@ -26,56 +26,67 @@ public class Message extends JPanel{
             "Oval", "Rectangle", "Round Rectangle"
     };
 
-    Boolean font_size_err = false;
-    Boolean height_err = false;
-    Boolean text_err = false;
-    Boolean width_err = false;
-    Boolean err = false;
 
-    String error_message = "Error:\n";
 
     public static boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch(NumberFormatException | NullPointerException e) {
-            return false;
-        }
+        try { Integer.parseInt(s); }
+        catch(NumberFormatException | NullPointerException e) { return false; }
         return true;
     }
 
     public void paint(Graphics g){
+        boolean err = false;
+        boolean width_err = false;
+        boolean height_err = false;
+
+        String error_message = "Error:\n";
         // No error checking for COLOR_B, COLOR_F, FONT, and SHAPE
         if (!isInteger(WIDTH) || Integer.parseInt(WIDTH) <= 0 || Integer.parseInt(WIDTH) > 500) {
+            err = true;
             width_err = true;
-            err = true;
-            g.setFont(new Font("Serif", Font.PLAIN, 16));
-            g.drawString(error_message, 15, 15);
-            g.drawString(" - WIDTH should be an integer in range (0, 500]\n",
-                    15, 15 + g.getFontMetrics().getHeight());
+            error_message += " - WIDTH should be an integer in range (0, 500]\n";
         }
-        else if (!isInteger(HEIGHT) || Integer.parseInt(HEIGHT) <= 0 || Integer.parseInt(HEIGHT) > 300) {
+        if (!isInteger(HEIGHT) || Integer.parseInt(HEIGHT) <= 0 || Integer.parseInt(HEIGHT) > 300) {
+            err = true;
             height_err = true;
-            err = true;
-            g.setFont(new Font("Serif", Font.PLAIN, 16));
-            g.drawString(error_message, 15, 15);
-            g.drawString(" - HEIGHT should be an integer in range (0, 300]\n",
-                    15, 15 + g.getFontMetrics().getHeight());
+            error_message += " - HEIGHT should be an integer in range (0, 300]\n";
         }
-        else if (!isInteger(FONT_SIZE) || Integer.parseInt(FONT_SIZE) < 0) {
-            font_size_err = true;
+        if (!isInteger(FONT_SIZE) || Integer.parseInt(FONT_SIZE) < 0) {
             err = true;
-            g.setFont(new Font("Serif", Font.PLAIN, 16));
-            g.drawString(error_message, 15, 15);
-            g.drawString(" - FONT SIZE should be an integer larger than 0\n",
-                    15, 15 + g.getFontMetrics().getHeight());
+            error_message += " - FONT SIZE should be an integer larger than 0\n";
         }
-        else if (TEXT.isEmpty()) {
-            text_err = true;
+        if (TEXT.isEmpty()) {
             err = true;
+            error_message += " - TEXT cannot be empty\n";
+        }
+        if (!width_err && !height_err) {
+            switch (FONT) {
+                case "Regular":
+                    g.setFont(new Font("Serif", Font.PLAIN, Integer.parseInt(FONT_SIZE)));
+                case "Bold":
+                    g.setFont(new Font("Serif", Font.BOLD, Integer.parseInt(FONT_SIZE)));
+                case "Italic":
+                    g.setFont(new Font("Serif", Font.ITALIC, Integer.parseInt(FONT_SIZE)));
+                case "Bold Italic":
+                    g.setFont(new Font("Serif", Font.BOLD + Font.ITALIC, Integer.parseInt(FONT_SIZE)));
+            }
+            FontMetrics fm = g.getFontMetrics();
+            int str_width = fm.stringWidth(TEXT);
+            int str_height = fm.getHeight() - fm.getAscent() - fm.getDescent();
+
+            if (str_width > Integer.parseInt(WIDTH) || str_height > Integer.parseInt(HEIGHT)) {
+                err = true;
+                error_message += " - TEXT cannot be draw in the message box\n";
+            }
+        }
+        if (err) {
             g.setFont(new Font("Serif", Font.PLAIN, 16));
-            g.drawString(error_message, 15, 15);
-            g.drawString(" - TEXT cannot be empty\n",
-                    15, 15 + g.getFontMetrics().getHeight());
+            FontMetrics fm = g.getFontMetrics();
+            int y = 20;
+            for (String line : error_message.split("\n")) {
+                g.drawString(line, 15, y);
+                y += fm.getHeight();
+            }
         }
         else {
             /* Draw background part
@@ -83,7 +94,7 @@ public class Message extends JPanel{
                 - COLOR_B
                 - WIDTH & HEIGHT
                 - SHAPE
-            */
+             */
             switch (COLOR_B) {
                 case "Black":
                     g.setColor(Color.black);
@@ -155,7 +166,6 @@ public class Message extends JPanel{
             }
 
             /* Draw text part
-               Including:
              */
             switch (COLOR_F) {
                 case "Black":
@@ -223,16 +233,16 @@ public class Message extends JPanel{
         GridLayout grid = new GridLayout(10,2);
 
         JLabel color_back = new JLabel("Color - Background:");
-        JComboBox color_back_field = new JComboBox(COLOR_LIST);
+        JComboBox<String> color_back_field = new JComboBox<>(COLOR_LIST);
         color_back_field.setEditable(false);
         JLabel color_front = new JLabel("Color - Front:");
-        JComboBox color_front_field = new JComboBox(COLOR_LIST);
+        JComboBox<String> color_front_field = new JComboBox<>(COLOR_LIST);
         color_front_field.setEditable(false);
         JLabel font = new JLabel("Font style:");
-        JComboBox font_field = new JComboBox(FONT_LIST);
+        JComboBox<String> font_field = new JComboBox<>(FONT_LIST);
         font_field.setEditable(false);
         JLabel shape = new JLabel("Shape:");
-        JComboBox shape_field = new JComboBox(SHAPE_LIST);
+        JComboBox<String> shape_field = new JComboBox<>(SHAPE_LIST);
         shape_field.setEditable(false);
 
         JLabel font_size = new JLabel("Font size:");
@@ -248,12 +258,12 @@ public class Message extends JPanel{
         draw.setSize(20,20);
 
         draw.addActionListener(actionEvent -> {
-            COLOR_B = color_back_field.getSelectedItem().toString();
-            COLOR_F = color_front_field.getSelectedItem().toString();
-            FONT = font_field.getSelectedItem().toString();
+            COLOR_B = Objects.requireNonNull(color_back_field.getSelectedItem()).toString();
+            COLOR_F = Objects.requireNonNull(color_front_field.getSelectedItem()).toString();
+            FONT = Objects.requireNonNull(font_field.getSelectedItem()).toString();
             FONT_SIZE = font_size_field.getText();
             HEIGHT = height_field.getText();
-            SHAPE = shape_field.getSelectedItem().toString();
+            SHAPE = Objects.requireNonNull(shape_field.getSelectedItem()).toString();
             TEXT = text_field.getText();
             WIDTH = width_field.getText();
 
