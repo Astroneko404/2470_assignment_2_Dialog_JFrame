@@ -1,32 +1,31 @@
 package Message;
 
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Objects;
 import javax.swing.*;
 
 public class Message extends JPanel{
-    private static String COLOR_B;
-    private static String COLOR_F;
-    private static String FONT;
-    private static String FONT_SIZE;
-    private static String HEIGHT;
-    private static String SHAPE;
-    private static String TEXT;
-    private static String WIDTH;
+    static String COLOR_B;
+    static String COLOR_F;
+    static String FONT;
+    static String FONT_SIZE;
+    static String HEIGHT;
+    static String SHAPE;
+    static String TEXT;
+    static String WIDTH;
 
-    private static String[] COLOR_LIST = {
-            "Black", "Blue", "Cyan", "Dark gray",
-            "Gray", "Green", "Light gray", "Magenta",
-            "Orange", "Pink", "Red", "White", "Yellow"
+    String[] COLOR_LIST = {
+            "black", "blue", "cyan", "dark gray",
+            "gray", "green", "light gray", "magenta",
+            "orange", "pink", "red", "white", "yellow"
     };
-    private static String[] FONT_LIST = {
-            "Regular", "Bold", "Italic", "Bold Italic"
+    String[] FONT_LIST = {
+            "regular", "bold", "italic", "bold italic"
     };
-    private static String[] SHAPE_LIST = {
-            "Oval", "Rectangle", "Round Rectangle"
+    String[] SHAPE_LIST = {
+            "oval", "rectangle", "round rectangle"
     };
-
-
 
     public static boolean isInteger(String s) {
         try { Integer.parseInt(s); }
@@ -40,7 +39,18 @@ public class Message extends JPanel{
         boolean height_err = false;
 
         String error_message = "Error:\n";
-        // No error checking for COLOR_B, COLOR_F, FONT, and SHAPE
+
+        if (!Arrays.asList(COLOR_LIST).contains(COLOR_B)) {
+            err = true;
+            error_message += " - COLOR_BACKGROUND should be Java preset color:\n " +
+                    "\tblue, cyan, dark gray, gray, green, light gray, \n" +
+                    "\tmagenta, orange, pink, red, white, yellow\n";
+        };
+        if (!Arrays.asList(SHAPE_LIST).contains(SHAPE)) {
+            err = true;
+            error_message += " - SHAPE should be oval, rectangle, or round rectangle\n";
+        }
+
         if (!isInteger(WIDTH) || Integer.parseInt(WIDTH) <= 0 || Integer.parseInt(WIDTH) > 500) {
             err = true;
             width_err = true;
@@ -51,6 +61,13 @@ public class Message extends JPanel{
             height_err = true;
             error_message += " - HEIGHT should be an integer in range (0, 300]\n";
         }
+
+        if (!Arrays.asList(COLOR_LIST).contains(COLOR_F)) {
+            err = true;
+            error_message += " - COLOR_FRONT should be Java preset color:\n " +
+                    "\tblue, cyan, dark gray, gray, green, light gray, \n" +
+                    "\tmagenta, orange, pink, red, white, yellow\n";
+        };
         if (!isInteger(FONT_SIZE) || Integer.parseInt(FONT_SIZE) < 0) {
             err = true;
             error_message += " - FONT SIZE should be an integer larger than 0\n";
@@ -60,23 +77,29 @@ public class Message extends JPanel{
             error_message += " - TEXT cannot be empty\n";
         }
         if (!width_err && !height_err) {
-            switch (FONT) {
-                case "Regular":
-                    g.setFont(new Font("Serif", Font.PLAIN, Integer.parseInt(FONT_SIZE)));
-                case "Bold":
-                    g.setFont(new Font("Serif", Font.BOLD, Integer.parseInt(FONT_SIZE)));
-                case "Italic":
-                    g.setFont(new Font("Serif", Font.ITALIC, Integer.parseInt(FONT_SIZE)));
-                case "Bold Italic":
-                    g.setFont(new Font("Serif", Font.BOLD + Font.ITALIC, Integer.parseInt(FONT_SIZE)));
-            }
-            FontMetrics fm = g.getFontMetrics();
-            int str_width = fm.stringWidth(TEXT);
-            int str_height = fm.getHeight() - fm.getAscent() - fm.getDescent();
-
-            if (str_width > Integer.parseInt(WIDTH) || str_height > Integer.parseInt(HEIGHT)) {
+            if (!Arrays.asList(FONT_LIST).contains(FONT)) {
                 err = true;
-                error_message += " - TEXT cannot be draw in the message box\n";
+                error_message += "FONT should be regular, bold, italic, or bold italic\n";
+            }
+            else {
+                switch (FONT) {
+                    case "regular":
+                        g.setFont(new Font("Serif", Font.PLAIN, Integer.parseInt(FONT_SIZE)));
+                    case "bold":
+                        g.setFont(new Font("Serif", Font.BOLD, Integer.parseInt(FONT_SIZE)));
+                    case "italic":
+                        g.setFont(new Font("Serif", Font.ITALIC, Integer.parseInt(FONT_SIZE)));
+                    case "bold italic":
+                        g.setFont(new Font("Serif", Font.BOLD + Font.ITALIC, Integer.parseInt(FONT_SIZE)));
+                }
+                FontMetrics fm = g.getFontMetrics();
+                int str_width = fm.stringWidth(TEXT);
+                int str_height = fm.getHeight() - fm.getAscent() - fm.getDescent();
+
+                if (str_width > Integer.parseInt(WIDTH) || str_height > Integer.parseInt(HEIGHT)) {
+                    err = true;
+                    error_message += " - TEXT cannot be draw in the message box\n";
+                }
             }
         }
         if (err) {
@@ -89,55 +112,49 @@ public class Message extends JPanel{
             }
         }
         else {
-            /* Draw background part
-               Including:
-                - COLOR_B
-                - WIDTH & HEIGHT
-                - SHAPE
-             */
             switch (COLOR_B) {
-                case "Black":
+                case "black":
                     g.setColor(Color.black);
                     break;
-                case "Blue":
+                case "blue":
                     g.setColor(Color.blue);
                     break;
-                case "Cyan":
+                case "cyan":
                     g.setColor(Color.cyan);
                     break;
-                case "Dark gray":
+                case "dark gray":
                     g.setColor(Color.darkGray);
                     break;
-                case "Gray":
+                case "gray":
                     g.setColor(Color.gray);
                     break;
-                case "Green":
+                case "green":
                     g.setColor(Color.green);
                     break;
-                case "Light gray":
+                case "light gray":
                     g.setColor(Color.lightGray);
                     break;
-                case "Magenta":
+                case "magenta":
                     g.setColor(Color.magenta);
                     break;
-                case "Orange":
+                case "orange":
                     g.setColor(Color.orange);
                     break;
-                case "Pink":
+                case "pink":
                     g.setColor(Color.pink);
                     break;
-                case "Red":
+                case "red":
                     g.setColor(Color.red);
                     break;
-                case "White":
+                case "white":
                     g.setColor(Color.white);
                     break;
-                case "Yellow":
+                case "yellow":
                     g.setColor(Color.yellow);
                     break;
             }
             switch (SHAPE) {
-                case "Oval":
+                case "oval":
                     g.fillOval(
                             (500 - Integer.parseInt(WIDTH)) / 2,
                             (300 - Integer.parseInt(HEIGHT)) / 2,
@@ -145,7 +162,7 @@ public class Message extends JPanel{
                             Integer.parseInt(HEIGHT)
                     );
                     break;
-                case "Rectangle":
+                case "rectangle":
                     g.fillRect(
                             (500 - Integer.parseInt(WIDTH)) / 2,
                             (300 - Integer.parseInt(HEIGHT)) / 2,
@@ -153,7 +170,7 @@ public class Message extends JPanel{
                             Integer.parseInt(HEIGHT)
                     );
                     break;
-                case "Round Rectangle":
+                case "round Rectangle":
                     g.fillRoundRect(
                             (500 - Integer.parseInt(WIDTH)) / 2,
                             (300 - Integer.parseInt(HEIGHT)) / 2,
@@ -165,59 +182,63 @@ public class Message extends JPanel{
                     break;
             }
 
-            /* Draw text part
-             */
             switch (COLOR_F) {
-                case "Black":
+                case "black":
                     g.setColor(Color.black);
                     break;
-                case "Blue":
+                case "blue":
                     g.setColor(Color.blue);
                     break;
-                case "Cyan":
+                case "cyan":
                     g.setColor(Color.cyan);
                     break;
-                case "Dark gray":
+                case "dark gray":
                     g.setColor(Color.darkGray);
                     break;
-                case "Gray":
+                case "gray":
                     g.setColor(Color.gray);
                     break;
-                case "Green":
+                case "green":
                     g.setColor(Color.green);
                     break;
-                case "Light gray":
+                case "light gray":
                     g.setColor(Color.lightGray);
                     break;
-                case "Magenta":
+                case "magenta":
                     g.setColor(Color.magenta);
                     break;
-                case "Orange":
+                case "orange":
                     g.setColor(Color.orange);
                     break;
-                case "Pink":
+                case "pink":
                     g.setColor(Color.pink);
                     break;
-                case "Red":
+                case "red":
                     g.setColor(Color.red);
                     break;
-                case "White":
+                case "white":
                     g.setColor(Color.white);
                     break;
-                case "Yellow":
+                case "yellow":
                     g.setColor(Color.yellow);
                     break;
+                default:
+                    err = true;
+                    error_message += " - COLOR_FRONT should be Java preset color:\n " +
+                            "\tblue, cyan, dark gray, gray, green, light gray, \n" +
+                            "\tmagenta, orange, pink, red, white, yellow\n";
             }
             switch (FONT) {
-                case "Regular":
+                case "regular":
                     g.setFont(new Font("Serif", Font.PLAIN, Integer.parseInt(FONT_SIZE)));
-                case "Bold":
+                case "bold":
                     g.setFont(new Font("Serif", Font.BOLD, Integer.parseInt(FONT_SIZE)));
-                case "Italic":
+                case "italic":
                     g.setFont(new Font("Serif", Font.ITALIC, Integer.parseInt(FONT_SIZE)));
-                case "Bold Italic":
+                case "bold italic":
                     g.setFont(new Font("Serif", Font.BOLD + Font.ITALIC, Integer.parseInt(FONT_SIZE)));
             }
+
             FontMetrics fm = g.getFontMetrics();
             int str_width = fm.stringWidth(TEXT);
             int str_height = fm.getHeight() - fm.getAscent() - fm.getDescent();
@@ -226,85 +247,21 @@ public class Message extends JPanel{
     }
 
     public static void main(String[] args){
-        JFrame f = new JFrame("Message");
-        JPanel main = new JPanel();
-        JPanel setting = new JPanel();
-        JFrame f2 = new JFrame("Draw");
-        GridLayout grid = new GridLayout(10,2);
+        COLOR_B = JOptionPane.showInputDialog("Please input background color: ").toLowerCase();
+        SHAPE = JOptionPane.showInputDialog("Please input shape: ").toLowerCase();
+        WIDTH = JOptionPane.showInputDialog("Please input weight (int 1 - 500): ");
+        HEIGHT = JOptionPane.showInputDialog("Please input height (int 1 - 300): ");
 
-        JLabel color_back = new JLabel("Color - Background:");
-        JComboBox<String> color_back_field = new JComboBox<>(COLOR_LIST);
-        color_back_field.setEditable(false);
-        JLabel color_front = new JLabel("Color - Front:");
-        JComboBox<String> color_front_field = new JComboBox<>(COLOR_LIST);
-        color_front_field.setEditable(false);
-        JLabel font = new JLabel("Font style:");
-        JComboBox<String> font_field = new JComboBox<>(FONT_LIST);
-        font_field.setEditable(false);
-        JLabel shape = new JLabel("Shape:");
-        JComboBox<String> shape_field = new JComboBox<>(SHAPE_LIST);
-        shape_field.setEditable(false);
+        COLOR_F = JOptionPane.showInputDialog("Please input front part color: ").toLowerCase();
+        FONT = JOptionPane.showInputDialog("Please input font style: ").toLowerCase();
+        FONT_SIZE = JOptionPane.showInputDialog("Please input font size: ");
 
-        JLabel font_size = new JLabel("Font size:");
-        JTextField font_size_field = new JTextField(20);
-        JLabel height = new JLabel("Height:");
-        JTextField height_field = new JTextField(20);
-        JLabel text = new JLabel("Text:");
-        JTextField text_field = new JTextField(20);
-        JLabel width = new JLabel("Width:");
-        JTextField width_field = new JTextField(20);
+        TEXT = JOptionPane.showInputDialog("Please input text message: ");
 
-        JButton draw = new JButton("Draw");
-        draw.setSize(20,20);
-
-        draw.addActionListener(actionEvent -> {
-            COLOR_B = Objects.requireNonNull(color_back_field.getSelectedItem()).toString();
-            COLOR_F = Objects.requireNonNull(color_front_field.getSelectedItem()).toString();
-            FONT = Objects.requireNonNull(font_field.getSelectedItem()).toString();
-            FONT_SIZE = font_size_field.getText();
-            HEIGHT = height_field.getText();
-            SHAPE = Objects.requireNonNull(shape_field.getSelectedItem()).toString();
-            TEXT = text_field.getText();
-            WIDTH = width_field.getText();
-
-            f2.setSize(500, 300);
-            f2.add(new Message());
-            f2.setVisible(true);
-        });
-
-        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
-
-        setting.setLayout(grid);
-        setting.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        setting.add(color_back);
-        setting.add(color_back_field);
-        setting.add(shape);
-        setting.add(shape_field);
-        setting.add(width);
-        setting.add(width_field);
-        setting.add(height);
-        setting.add(height_field);
-
-        setting.add(color_front);
-        setting.add(color_front_field);
-        setting.add(font);
-        setting.add(font_field);
-        setting.add(font_size);
-        setting.add(font_size_field);
-
-        setting.add(text);
-        setting.add(text_field);
-
-        setting.add(new JLabel(" "));
-        setting.add(new JLabel(" "));
-        setting.add(new JLabel(" "));
-        setting.add(draw);
-
-        main.add(setting);
+        JFrame f = new JFrame();
 
         f.setSize(500, 300);
-        f.add(main);
+        f.add(new Message());
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }
